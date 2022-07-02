@@ -11,9 +11,9 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('person.index') }}">Home</a>
         </div>
-        <ul class="nav navbar-nav">
+        {{-- <ul class="nav navbar-nav">
             <li><a href="{{ route('person.create') }}">Create a person</a>
-        </ul>
+        </ul> --}}
         <ul class="nav navbar-nav">
             <li><a href="{{ route('person.vue') }}">Vue</a>
         </ul>
