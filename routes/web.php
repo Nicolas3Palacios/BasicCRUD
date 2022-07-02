@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [CategoryController::class,'get']);
-Route::group(['prefix'=>'/Category','controller'=>CategoryController::class],function()
-{
-     Route::post('/save','save')->name('category.save');
-     Route::post('/update/{category}','update')->name('category.update');
-     Route::post('/delete/{category}','delete')->name('category.delete');
+// Route::get('/', [CategoryController::class,'get']);
+// Route::group(['prefix'=>'/Category','controller'=>CategoryController::class],function()
+// {
+//      Route::post('/save','save')->name('category.save');
+//      Route::post('/update/{category}','update')->name('category.update');
+//      Route::post('/delete/{category}','delete')->name('category.delete');
 
-});
+// });
 
 
-Route::get('/person',[sharkController::class,'index'])->name('person.index');
+Route::get('/',[sharkController::class,'index'])->name('person.index');
 
 Route::group(['prefix'=>'/person','controller'=>sharkController::class],function(){
     Route::name('person.')->group( function(){
