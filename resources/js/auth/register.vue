@@ -46,16 +46,26 @@ export default {
                 name: "",
                 email: "",
                 password: "",
+                remember_token:""
             },
         };
     },
     methods: {
         async register() {
-            const res = await axios.post("/Auth/register", this.user);
-            if (res.data.saved) {
-                alert("Sign up successfully");
-                window.location.redirect("Auth/login");
-            }
+            const res = await axios.post("/Auth/register", this.user).then(res=>{
+
+                if (res.data.saved) {
+                    this.user = {
+                        name:'',
+                        email:'',
+                        password:''
+                    }
+                    alert("Sign up successfully");
+                    window.location.redirect("/Auth/login");
+                } else {
+                    alert("Error");
+                }
+            })
         },
     },
 };

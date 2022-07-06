@@ -19674,7 +19674,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       user: {
         name: "",
         email: "",
-        password: ""
+        password: "",
+        remember_token: ""
       }
     };
   },
@@ -19689,17 +19690,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post("/Auth/register", _this.user);
+                return axios.post("/Auth/register", _this.user).then(function (res) {
+                  if (res.data.saved) {
+                    _this.user = {
+                      name: '',
+                      email: '',
+                      password: ''
+                    };
+                    alert("Sign up successfully");
+                    window.location.redirect("/Auth/login");
+                  } else {
+                    alert("Error");
+                  }
+                });
 
               case 2:
                 res = _context.sent;
 
-                if (res.data.saved) {
-                  alert("Sign up successfully");
-                  window.location.redirect("Auth/login");
-                }
-
-              case 4:
+              case 3:
               case "end":
                 return _context.stop();
             }
