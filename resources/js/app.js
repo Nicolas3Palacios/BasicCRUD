@@ -3,13 +3,16 @@ import './bootstrap';
 import * as Vue from 'vue'
 import index from "./views/index.vue"
 import Personform from "./views/form.vue"
-import Persontable from "./views/table.vue"
+import login from "./auth/login.vue"
+import register from "./auth/register.vue"
 
 
 const app = Vue.createApp({
     components:{
         index,
-        Personform
+        Personform,
+        login,
+        register
     }
 })
 

@@ -67,7 +67,7 @@ export default {
                     };
                     // this.allUsers.push(res.data.person)
                     this.$parent.allUsers.push(res.data.person);
-                    alert("Information saved");
+                    alert("Information saved"); 
                 } else if (res.data.updated) {
                     alert("Information updated");
                     window.location.href = "/person/vue";

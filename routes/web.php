@@ -25,18 +25,24 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/',[sharkController::class,'index'])->name('person.index');
+Route::get('/', [sharkController::class, 'index'])->name('person.index');
 
-Route::group(['prefix'=>'/person','controller'=>sharkController::class],function(){
-    Route::name('person.')->group( function(){
-        Route::get('/create','create')->name('create');//->name('person.create')
-        Route::post('/store','store')->name('store');
-        Route::get('/edit/{person}','edit')->name('edit');
-        Route::post('/update/{person}','update')->name('update');
-        Route::post('/delete/{person}','destroy')->name('destroy');
-        Route::get('/vue','vue')->name('vue');
+Route::group(['prefix' => '/Auth', 'controller' => App\Http\Controllers\Auth\AuthController::class], function () {
+    Route::get('/login', 'loginView')->name('login');
+    Route::get('/register', 'registerView')->name('register');
+    route::post('/login', 'login')->name('login');
+    route::post('/register', 'register')->name('register');
+});
+
+Route::group(['prefix' => '/person', 'controller' => sharkController::class], function () {
+    Route::name('person.')->group(function () {
+        Route::get('/create', 'create')->name('create'); //->name('person.create')
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{person}', 'edit')->name('edit');
+        Route::post('/update/{person}', 'update')->name('update');
+        Route::post('/delete/{person}', 'destroy')->name('destroy');
+        Route::get('/vue', 'vue')->name('vue');
     });
-
 });
 
 
@@ -97,5 +103,3 @@ Route::group(['prefix'=>'/person','controller'=>sharkController::class],function
 //         Route::resource('user', UserController::class);
 //     });
 // });
-
-

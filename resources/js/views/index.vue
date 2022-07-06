@@ -11,6 +11,7 @@ import Personform from "./form";
 import Persontable from "./table";
 export default {
     name: "index",
+    props: ["users"],
     data() {
         return {
             allUsers: this.users,
@@ -19,7 +20,6 @@ export default {
             },
         };
     },
-    props: ["users"],
     components: {
         Personform,
         Persontable,
