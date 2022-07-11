@@ -7,7 +7,7 @@
             <td>Name</td>
             <td>Email</td>
             <td>Age</td>
-            <td>Actions</td>
+            {{-- <td>Actions</td> --}}
         </tr>
     </thead>
     <tbody>
@@ -18,14 +18,14 @@
             <td>{{ $value->email }}</td>
             <td>{{ $value->age }}</td>
 
-            <td>
+            {{-- <td>
                 <a class="btn btn-small btn-success" href="{{route('person.edit',['person'=>$value->id])}}">Edit this person</a>
                 <form action="{{route('person.destroy',['person'=>$value->id])}}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-small btn-danger">delete</button>
                 </form>
 
-            </td>
+            </td> --}}
         </tr>
     @endforeach
     </tbody>

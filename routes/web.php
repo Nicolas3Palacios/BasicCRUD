@@ -4,16 +4,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\sharkController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // Route::get('/', [CategoryController::class,'get']);
 // Route::group(['prefix'=>'/Category','controller'=>CategoryController::class],function()
@@ -27,21 +17,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [sharkController::class, 'index'])->name('person.index');
 
-Route::group(['prefix' => '/Auth', 'controller' => App\Http\Controllers\Auth\AuthController::class], function () {
-    Route::get('/login', 'loginView')->name('login');
-    Route::get('/register', 'registerView')->name('register');
-    route::post('/login', 'login')->name('login');
-    route::post('/register', 'register')->name('register');
+Route::group(['prefix'=>'/Home', 'controller' => App\Http\Controllers\HomeController::class], function () {
+Route::get('/', 'index')->name('index');
+
 });
 
-Route::group(['prefix' => '/person', 'controller' => sharkController::class], function () {
+Route::group(['prefix' => '/Auth', 'controller' => App\Http\Controllers\Auth\AuthController::class], function () {
+    Route::get('/login', 'loginView')->name('login'); //->url:('/Auth/login')
+    Route::get('/register', 'registerView')->name('register');
+
+    route::post('/login', 'login')->name('login');
+    route::post('/register', 'register')->name('register');
+
+    route::get('/logout','logout')->name('logout');
+});
+
+Route::group(['prefix' => '/person','middleware'=>'auth', 'controller' => sharkController::class], function () {
     Route::name('person.')->group(function () {
+        Route::get('/vue', 'vue')->name('vue');
         Route::get('/create', 'create')->name('create'); //->name('person.create')
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{person}', 'edit')->name('edit');
         Route::post('/update/{person}', 'update')->name('update');
         Route::post('/delete/{person}', 'destroy')->name('destroy');
-        Route::get('/vue', 'vue')->name('vue');
     });
 });
 
@@ -86,7 +84,7 @@ Route::group(['prefix' => '/person', 'controller' => sharkController::class], fu
 // Route::name('admin.')->group(function(){
 //     Route::get('/users', function () {
 //         return view('test');
-//     })->name('users.show');
+//     })->name('admin.show');
 // });
 
 // // Middlewares

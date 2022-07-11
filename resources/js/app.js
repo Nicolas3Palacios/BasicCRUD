@@ -5,6 +5,7 @@ import index from "./views/index.vue"
 import Personform from "./views/form.vue"
 import login from "./auth/login.vue"
 import register from "./auth/register.vue"
+import logout from "./auth/logout.vue"
 
 
 const app = Vue.createApp({
@@ -12,7 +13,8 @@ const app = Vue.createApp({
         index,
         Personform,
         login,
-        register
+        register,
+        logout
     }
 })
 

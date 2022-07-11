@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import Auth from "../helpers/auth"
+
 export default {
     name: "login",
     data() {
@@ -47,7 +49,8 @@ export default {
             try {
                 const res = await axios.post("/Auth/login", this.user);
                 if (res.data.login) {
-                    alert("Sign in successfully");
+                    Auth.set(res.data.user.email, res.data.user.name)
+                    window.location.href = '/person/vue'
                 }
             } catch (e) {
                 alert("Email or Password Incorrect");

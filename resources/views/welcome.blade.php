@@ -34,7 +34,8 @@
 <body>
     <div class="container">
         @extends('nav')
-            @php(!isset($type) ? ($type = 'home') : '')
+
+            @php(!isset($type) ? $type = 'home' : '')
             @endphp
 
             @if ($type == 'login')

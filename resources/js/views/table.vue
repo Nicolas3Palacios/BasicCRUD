@@ -1,6 +1,5 @@
 <template>
     <main>
-        <h2>Table</h2>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>

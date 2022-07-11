@@ -1,12 +1,12 @@
 <template>
     <main>
-        <h1>Index</h1>
         <Personform></Personform>
         <Persontable :allUsers="allUsers"></Persontable>
     </main>
 </template>
 
 <script>
+import Auth from "../helpers/auth"
 import Personform from "./form";
 import Persontable from "./table";
 export default {
@@ -19,6 +19,9 @@ export default {
                 created: true,
             },
         };
+    },
+    mounted(){
+        Auth.initialize()
     },
     components: {
         Personform,

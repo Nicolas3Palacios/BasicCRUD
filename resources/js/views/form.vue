@@ -1,6 +1,5 @@
 <template>
     <main>
-        <h2>Form</h2>
         <form @submit.prevent="save">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -54,6 +53,7 @@ export default {
             this.user ? (this.person = this.user) : "";
         },
         async save() {
+            
             let url = `/person/update/${this.person.id}`;
             if (!this.user) {
                 url = "/person/store";
@@ -67,7 +67,7 @@ export default {
                     };
                     // this.allUsers.push(res.data.person)
                     this.$parent.allUsers.push(res.data.person);
-                    alert("Information saved"); 
+                    alert("Information saved");
                 } else if (res.data.updated) {
                     alert("Information updated");
                     window.location.href = "/person/vue";

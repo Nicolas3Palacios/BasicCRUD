@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\shark;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,13 +28,14 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, true)) {
             return response()->json([
                 'login' => true,
+                'user'=> User::select(['name','email'])->whereId(Auth::id())->first(),
                 'errors' => null
             ], 200);
         } else {
             return response()->json([
                 'login' => false,
                 'errors' => 'Email or Password are Incorrect'
-            ],422);
+            ], 422);
         }
     }
 
@@ -45,6 +47,18 @@ class AuthController extends Controller
 
         return response()->json([
             'saved' => true,
-        ],200);
+        ], 200);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        
+        return response()->json([
+            'logout'=>true
+        ]);
+
+        // $sharks = shark::all();
+        // return view('sharks.index', ['sharks' => $sharks]);
     }
 }
