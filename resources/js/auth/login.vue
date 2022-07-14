@@ -1,37 +1,41 @@
 <template>
-    <main>
-        <form @submit.prevent="login">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    placeholder="Enter email"
-                    v-model="user.email"
-                />
-                <small id="emailHelp" class="form-text text-muted"
-                    >We'll never share your email with anyone else.</small
+    <main class="d-flex justify-content-center align-items-center">
+        <div class="my-5 d-flex justify-content-center" style="width: 250px">
+            <form @submit.prevent="login">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="exampleInputEmail1"
+                        placeholder="Enter email"
+                        v-model="user.email"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Password"
+                        v-model="user.password"
+                    />
+                </div>
+                <div
+                    class="d-flex justify-content-center justify-content-center my-2"
                 >
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                    v-model="user.password"
-                />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                    <button type="submit" class="btn btn-primary">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+        </div>
     </main>
 </template>
 
 <script>
-import Auth from "../helpers/auth"
+import Auth from "../helpers/auth";
 
 export default {
     name: "login",
@@ -40,7 +44,7 @@ export default {
             user: {
                 email: "",
                 password: "",
-                con:'123'
+                con: "123",
             },
         };
     },
@@ -49,8 +53,8 @@ export default {
             try {
                 const res = await axios.post("/Auth/login", this.user);
                 if (res.data.login) {
-                    Auth.set(res.data.user.email, res.data.user.name)
-                    window.location.href = '/person/vue'
+                    Auth.set(res.data.user.email, res.data.user.name);
+                    window.location.href = "/";
                 }
             } catch (e) {
                 alert("Email or Password Incorrect");

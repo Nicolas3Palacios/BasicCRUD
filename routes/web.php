@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\sharkController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,20 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/', [sharkController::class, 'index'])->name('person.index');
+Route::get('/', [PostController::class, 'index'])->name('post.index');
 
-Route::group(['prefix'=>'/Home', 'controller' => App\Http\Controllers\HomeController::class], function () {
-Route::get('/', 'index')->name('index');
+Route::group(['prefix' => '/Home', 'controller' => App\Http\Controllers\HomeController::class], function () {
+    Route::get('/', 'index')->name('index');
+});
 
+Route::group(['prefix' => '/Post', 'controller' => PostController::class], function () {
+    Route::name('post.')->group(function () {
+        Route::get('/list', 'list')->name('list');
+        Route::group(['middleware' => 'auth'], function () {
+            Route::post('/save', 'store')->name('save');
+            Route::delete('/delete/{id}', 'delete');
+        });
+    });
 });
 
 Route::group(['prefix' => '/Auth', 'controller' => App\Http\Controllers\Auth\AuthController::class], function () {
@@ -29,10 +39,10 @@ Route::group(['prefix' => '/Auth', 'controller' => App\Http\Controllers\Auth\Aut
     route::post('/login', 'login')->name('login');
     route::post('/register', 'register')->name('register');
 
-    route::get('/logout','logout')->name('logout');
+    route::get('/logout', 'logout')->name('logout');
 });
 
-Route::group(['prefix' => '/person','middleware'=>'auth', 'controller' => sharkController::class], function () {
+Route::group(['prefix' => '/person', 'middleware' => 'auth', 'controller' => sharkController::class], function () {
     Route::name('person.')->group(function () {
         Route::get('/vue', 'vue')->name('vue');
         Route::get('/create', 'create')->name('create'); //->name('person.create')
