@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/', [PostController::class, 'index'])->middleware('auth')->name('post.index');
 
 Route::group(['prefix' => '/Home', 'controller' => App\Http\Controllers\HomeController::class], function () {
     Route::get('/', 'index')->name('index');
@@ -27,7 +27,19 @@ Route::group(['prefix' => '/Post', 'controller' => PostController::class], funct
         Route::get('/list', 'list')->name('list');
         Route::group(['middleware' => 'auth'], function () {
             Route::post('/save', 'store')->name('save');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::post('/update/{id}', 'update')->name('update');
             Route::delete('/delete/{id}', 'delete');
+        });
+    });
+});
+
+Route::group(['prefix' => '/User', 'controller' => PostController::class], function () {
+    Route::name('user.')->group(function () {
+        Route::group(['middleware' => 'auth'], function () {
+            Route::get('/index', 'userIndex')->name('index');
+            Route::get('/posts', 'userPosts')->name('posts');
+
         });
     });
 });

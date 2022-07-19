@@ -27,7 +27,7 @@
                                     href="{{ route('person.vue') }}">Vue</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link">Welcome {{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                                <a class="nav-link" href="{{ route('user.index') }}">Welcome {{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
                             </li>
                             <li class="nav-item">
                                 <logout></logout>

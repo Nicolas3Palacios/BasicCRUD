@@ -2,8 +2,7 @@
 @section('content')
     <div id="app">
         @auth
-            <postform></postform>
+            <postForm :pozt="{{ $post }}"/>
         @endauth
-        <allpost ref="allPost"></allpost>
     </div>
 @endsection

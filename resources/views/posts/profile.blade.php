@@ -2,8 +2,7 @@
 @section('content')
     <div id="app">
         @auth
-            <postform></postform>
+            <user-profile></user-profile>
         @endauth
-        <allpost ref="allPost"></allpost>
     </div>
 @endsection

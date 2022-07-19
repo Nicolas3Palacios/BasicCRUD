@@ -44,7 +44,6 @@ export default {
             user: {
                 email: "",
                 password: "",
-                con: "123",
             },
         };
     },

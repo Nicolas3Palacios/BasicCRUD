@@ -1,8 +1,10 @@
 <template>
     <main>
-        <button @click="askDelete" class="btn btn-sm btn-warning">
-            Delete post
-        </button>
+        <div class="btn-group" role="group">
+            <button type="button" @click="askDelete" class="btn btn-warning">
+                Delete
+            </button>
+        </div>
     </main>
 </template>
 
@@ -40,7 +42,9 @@ export default {
                         text: "Post deleted!",
                         icon: "success",
                     });
-                    window.location.href = "/"
+                    this.$root.$refs.allPost.index()
+
+                    // window.location.href = "/"
                 }
             });
         },

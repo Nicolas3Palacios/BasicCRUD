@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -21,7 +22,21 @@ class PostController extends Controller
         return view('posts.index');
     }
 
+    public function userIndex()
+    {
+        return view('posts.profile');
+    }
 
+    public function userPosts()
+    {
+        $posts = DB::table('posts')->where('user_id','=',Auth::id())->get();
+        $user_id = Auth::id();
+
+        return response()->json([
+            'posts' => $posts,
+            'user_id' => $user_id
+        ]);
+    }
 
     /**
      * Show the listo for all tha posts.
@@ -31,8 +46,10 @@ class PostController extends Controller
     public function list()
     {
         $posts = Post::all();
+        $user_id = Auth::id();
         return response()->json([
-            'posts' => $posts
+            'posts' => $posts,
+            'user_id' => $user_id
         ]);
     }
 
@@ -63,6 +80,36 @@ class PostController extends Controller
         return response()->json([
             'saved' => true,
             'post' => $post
+        ]);
+    }
+
+   /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $has = false;
+        if ($request->hasFile('image')) {
+            $image = $this->saveImage($request);
+            $has = true;
+        }
+
+        $post = Post::find($id);
+
+        if ($has) {
+            $post->image = $image;
+        }
+        $post->title = $request->title;
+        $post->description = $request->description;
+
+        $post->update();
+
+        return response()->json([
+            'updated' => true
         ]);
     }
 
@@ -103,22 +150,13 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit',['post'=>$post]);
     }
 
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
 
 

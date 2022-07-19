@@ -25,10 +25,10 @@
 
 <script>
 import Auth from "../helpers/auth";
-import DeletePost from "./deletePost.vue";
+import DeletePost from "../post/deletePost.vue";
 
 export default {
-    name: "Allpost",
+    name: "UserPost",
     data() {
         return {
             posts: [],
@@ -46,13 +46,13 @@ export default {
             this.validate();
         },
         async getPosts() {
-            const { data } = await axios.get("/Post/list");
-            console.log(data)
+            const {data}  = await axios.get("/User/posts");
             this.responseAxios(data);
         },
         responseAxios(res) {
             this.posts = res.posts;
             this.user_id = res.user_id
+            console.log(this.posts)
         },
         validate() {
             this.auth = Auth.data;

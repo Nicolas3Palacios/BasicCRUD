@@ -12,7 +12,7 @@ import logout from "./auth/logout.vue"
 
 import Postform from "./post/postForm.vue"
 import Allpost from "./post/allPosts.vue"
-
+import UserProfile from "./profile/userProfile.vue"
 
 const app = Vue.createApp({
     components:{
@@ -23,6 +23,7 @@ const app = Vue.createApp({
         logout,
         Postform,
         Allpost,
+        UserProfile,
     }
 })
 
